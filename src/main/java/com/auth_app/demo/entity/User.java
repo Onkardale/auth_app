@@ -40,15 +40,31 @@ public class User {
 
    @Enumerated (EnumType.STRING)
     private Provider provider = Provider.Local;
+
+
+   @ManyToMany(fetch = FetchType.EAGER)
+   @JoinTable(name = "roles",
+   joinColumns  = @JoinColumn(name ="user_id"),
+    inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
 
 
 
+@PrePersist
+   protected void onCreate(){
+       Instant now = Instant.now();
+       if (createdAt == null) createdAt = now;
+       updatedAt = now;
+
+   }
 
 
+   @PreUpdate
+protected  void onUpdate(){
+       updatedAt = Instant.now();
 
-
+}
 
 
 

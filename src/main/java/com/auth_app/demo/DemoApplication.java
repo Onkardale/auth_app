@@ -23,10 +23,7 @@ public class DemoApplication {
         return "auth_app";
 
     }
-    @GetMapping("/")
-public String authApp1(){
-return "hello";
-}
+
 }
 
 
